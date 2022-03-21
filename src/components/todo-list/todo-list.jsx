@@ -1,6 +1,8 @@
 import * as React from 'react';
+
 import { Checkbox } from '../checkbox';
 import { TodosContext } from '../../todo-context';
+
 import './todo-list.scss';
 
 export const TodoList = () => {
@@ -8,10 +10,23 @@ export const TodoList = () => {
 
   const handleDelete = (id) => {
     // Fix an ability to delete task
+    const updatedTodos = todos.filter((todo) => todo.id !== id);
+
+    setTodos(updatedTodos);
   };
 
   const toggleCheck = (id) => {
     // Fix an ability to toggle task
+    const updatedTodos = todos.map((todo) => {
+      const updatedTodo = todo;
+      if (updatedTodo.id === id) {
+        updatedTodo.checked = !updatedTodo.checked;
+      }
+
+      return updatedTodo;
+    });
+
+    setTodos(updatedTodos);
   };
 
   const handleKeyUp = (e, id) => {

@@ -1,8 +1,11 @@
 import * as React from 'react';
+import { useEffect } from 'react';
+
 import { TodoForm } from './components/todo-form';
 import { TodoList } from './components/todo-list';
 import { TodoResults } from './components/todo-results';
 import { TodosContext } from './todo-context';
+
 import './index.scss';
 
 const todosTemplate = [
@@ -41,9 +44,13 @@ const todosTemplate = [
 export const App = () => {
   const [todos, setTodos] = React.useState([]);
 
+  useEffect(() => {
+    setTodos(todosTemplate);
+  }, []);
+
   return (
     <div className="root">
-      <TodosContext.Provider value={{ todos }}>
+      <TodosContext.Provider value={{ todos, setTodos }}>
         <TodoList />
         <TodoResults />
         <TodoForm />
